@@ -45,7 +45,7 @@ import Swal from 'sweetalert2';
 let config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider('408043043727-jbb5t5muunapccidtp3vpbnrtq3b7sio.apps.googleusercontent.com')
+    provider: new GoogleLoginProvider('718484333750-9q51chmts2ia5l4ch8ivos3dimo3k6al.apps.googleusercontent.com')
   },
   {
     id: FacebookLoginProvider.PROVIDER_ID,
