@@ -130,7 +130,7 @@ import { UpdateWheelComponent } from 'src/app/views/admin/admin-wheel/update-whe
     MatTooltipModule,
     MatTreeModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyB-wq5GKz5nbc0CMjPWzqHyl4vZmzFoz7c'
+      apiKey: 'AIzaSyBdNkHFnywZtgi74b3LvWNvXrEsqktg7vs'
     })  ],
   declarations: [
     DashboardComponent,
