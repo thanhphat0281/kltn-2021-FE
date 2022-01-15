@@ -50,7 +50,7 @@ export class CustomerLayoutComponent implements OnInit {
 
   }
 
-  readonly baseURL = this._host.host();
+  // baseURL = this._host.host();
   changespinner = "chocolate";
   segments: any
   segmentsList = [] 
@@ -147,6 +147,7 @@ export class CustomerLayoutComponent implements OnInit {
 		return  n2.split('').reverse().join('') + 'VNĐ';
 	}
   designWheel() {
+    let baseURL= this._host.host()
     //Thông số vòng quay
     let duration = 5; //Thời gian kết thúc vòng quay
     let spins = 15; //Quay nhanh hay chậm 3, 8, 15
@@ -203,13 +204,13 @@ export class CustomerLayoutComponent implements OnInit {
       //tăng point 
       $.ajax({
         type: "post",
-        url: this.baseURL+'/points/updatePointByUserID',
+        url: baseURL+'/points/updatePointByUserID',
         data: {
           userID: (JSON.parse(localStorage.getItem('accountSocial')))._id,
           point: -80
         },
         success: function (response) {
-          $.get(this.baseURL+'/points/getPointByUserID/' + (JSON.parse(localStorage.getItem('accountSocial')))._id, function (data) {
+          $.get(baseURL+'/points/getPointByUserID/' + (JSON.parse(localStorage.getItem('accountSocial')))._id, function (data) {
             $("#pointcur").html(data[0].point + " Điểm");
           });
         }
@@ -217,7 +218,7 @@ export class CustomerLayoutComponent implements OnInit {
     }
     //startSpin
     function startSpin() {
-      $.get(this.baseURL+'/points/getPointByUserID/' + (JSON.parse(localStorage.getItem('accountSocial')))._id, function (data) {
+      $.get(baseURL+'/points/getPointByUserID/' + (JSON.parse(localStorage.getItem('accountSocial')))._id, function (data) {
         if (data[0].point >= 80) {
           // Ensure that spinning can't be clicked again while already running.
           if (wheelSpinning == false) {
@@ -249,13 +250,13 @@ export class CustomerLayoutComponent implements OnInit {
           addPoint = str[1];
           $.ajax({
             type: "post",
-            url: this.baseURL+'/points/updatePointByUserID',
+            url: baseURL+'/points/updatePointByUserID',
             data: {
               userID: (JSON.parse(localStorage.getItem('accountSocial')))._id,
               point: addPoint
             },
             success: function (response) {
-              $.get(this.baseURL+'/points/getPointByUserID/' + (JSON.parse(localStorage.getItem('accountSocial')))._id, function (data) {
+              $.get(baseURL+'/points/getPointByUserID/' + (JSON.parse(localStorage.getItem('accountSocial')))._id, function (data) {
                 $("#pointcur").html(data[0].point + " Điểm");
               });
             }
@@ -266,7 +267,7 @@ export class CustomerLayoutComponent implements OnInit {
           var str = res[indicatedSegment.text.split(" ").length - 1];
           $.ajax({
             type: "post",
-            url: this.baseURL+'/discountCodes',
+            url: baseURL+'/discountCodes',
             data: {
               userID: (JSON.parse(localStorage.getItem('accountSocial')))._id,
               discountCode: str.slice(0, -1),

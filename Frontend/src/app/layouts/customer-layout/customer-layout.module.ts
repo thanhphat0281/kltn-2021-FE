@@ -50,7 +50,7 @@ import { Page404NotFoundComponent } from 'src/app/views/customer/page404-not-fou
     CarouselModule,
     NgxImageZoomModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBVvOVq6QRBoLG9OlEhiJCfQV37FUsE8BU',
+      apiKey: 'AIzaSyCjE8B7GRsFSESyCQ7fhJh5e7ZIQ2EiyM8',
       libraries: ['places']
     }),
     AgmDirectionModule,MatIconModule
