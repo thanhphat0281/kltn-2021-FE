@@ -57,6 +57,7 @@ export class DashboardComponent implements OnInit {
 
       this.doughnutChartType = 'doughnut';
     })
+    this.totalMonth.yearCheck = "2021"
    this.TotalPriceOnEachMonth();
    
     $('#field_month').addClass("readonly-wrapper");
@@ -93,10 +94,22 @@ export class DashboardComponent implements OnInit {
     })
   }
   yearCheck: Date = new Date()
+  TotalPriceByMonth1 = [{ "month": "Jan", "totalPrice": 0, "count": 0 },
+  { "month": "Feb", "totalPrice": 0, "count": 0 },
+  { "month": "Mar", "totalPrice": 0, "count": 0 },
+  { "month": "Apr", "totalPrice": 0, "count": 0 },
+  { "month": "May", "totalPrice": 0, "count": 0 },
+  { "month": "Jun", "totalPrice": 0, "count": 0 },
+  { "month": "Jul", "totalPrice": 0, "count": 0 },
+  { "month": "Aug", "totalPrice": 0, "count": 0 },
+  { "month": "Sep", "totalPrice": 0, "count": 0 },
+  { "month": "Oct", "totalPrice": 0, "count": 0 },
+  { "month": "Nov", "totalPrice": 0, "count": 0 },
+  { "month": "Dec", "totalPrice": 0, "count": 0 },]
   TotalPriceByMonth = []
   TotalBookByMonth = []
   TotalPriceOnEachMonth(){
-    this.totalMonth.yearCheck = "2022"
+    
     this.statisticService.TotalPriceOnEachMonth(this.totalMonth).subscribe(res => {
       // this.TotalPriceByMonth = 
       this.barChartOptions = {
@@ -107,9 +120,17 @@ export class DashboardComponent implements OnInit {
       this.barChartType = 'bar'
       this.barChartLegend = true
       for(let i in (res as [])){
-        // console.log(res[i])
-        this.TotalPriceByMonth.push(res[i].totalPrice)
-        this.TotalBookByMonth.push(res[i].count)
+        console.log(res[i])
+        for(let index in this.TotalPriceByMonth1){
+          if(res[i].month == this.TotalPriceByMonth1[index].month){
+            this.TotalPriceByMonth1[index].totalPrice = res[i].totalPrice
+            this.TotalPriceByMonth1[index].count = res[i].count
+          }
+        }        
+      }
+      for(let index in this.TotalPriceByMonth1){
+        this.TotalPriceByMonth.push(this.TotalPriceByMonth1[index].totalPrice)
+        this.TotalBookByMonth.push(this.TotalPriceByMonth1[index].count)
       }
       this.barChartData = [  {data: this.TotalBookByMonth, label: 'Số lượng sách bán'},
                              {data: this.TotalPriceByMonth, label: 'Doanh thu'}  ]
@@ -147,6 +168,22 @@ export class DashboardComponent implements OnInit {
  changeYear(year){
   this.selectedYear = year
   this.customCheckMonthAndYear()
+  this.totalMonth.yearCheck =year
+  this.TotalPriceByMonth = []
+  this.TotalBookByMonth = []
+  this.TotalPriceByMonth1 = [{ "month": "Jan", "totalPrice": 0, "count": 0 },
+  { "month": "Feb", "totalPrice": 0, "count": 0 },
+  { "month": "Mar", "totalPrice": 0, "count": 0 },
+  { "month": "Apr", "totalPrice": 0, "count": 0 },
+  { "month": "May", "totalPrice": 0, "count": 0 },
+  { "month": "Jun", "totalPrice": 0, "count": 0 },
+  { "month": "Jul", "totalPrice": 0, "count": 0 },
+  { "month": "Aug", "totalPrice": 0, "count": 0 },
+  { "month": "Sep", "totalPrice": 0, "count": 0 },
+  { "month": "Oct", "totalPrice": 0, "count": 0 },
+  { "month": "Nov", "totalPrice": 0, "count": 0 },
+  { "month": "Dec", "totalPrice": 0, "count": 0 },]
+  this.TotalPriceOnEachMonth()
 }
  totalMonth: TotalMonth = new TotalMonth();
   changeMonth(month){
